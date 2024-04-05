@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>About</title>
+			<link href="style3.css" rel="stylesheet" type="text/css">
 <meta name='robots' content='max-image-preview:large' />
       <!-- Google Tag Manager -->
       <script>(function (w, d, s, l, i) {
@@ -600,7 +601,8 @@ How awesome is that?🤯"></div>
 				<div class="elementor-element elementor-element-57ed93b0 elementor-widget__width-initial elementor-widget elementor-widget-text-editor" data-id="57ed93b0" data-element_type="widget" data-widget_type="text-editor.default">
 				<div class="elementor-widget-container">
 								<div class="elementor-text-editor elementor-clearfix">
-				Ansh Patel is a visionary leader who founded Habitat for the World with a passion for helping people in need. Her expertise in non-profit management and her passion for humanitarian work drive her work to make a difference in the world.					</div>
+				Ansh Patel is a co-leader who helps Habitat for the World with helping people in-need. His experience in non-profit management and
+				his passion 				</div>
 						</div>
 				</div>
 				</div>
@@ -626,11 +628,102 @@ How awesome is that?🤯"></div>
 				<div class="elementor-section-wrap">
 							<div class="elementor-element elementor-element-4fd4bed e-flex e-con-boxed e-con e-parent" data-id="4fd4bed" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;content_width&quot;:&quot;boxed&quot;}" data-core-v316-plus="true">
 					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-c3fdf5d e-con-full e-flex e-con e-parent" data-id="c3fdf5d" data-element_type="container" data-settings="{&quot;content_width&quot;:&quot;full&quot;}" data-core-v316-plus="true">
-				<div class="elementor-element elementor-element-97d1ea3 animated-slow elementor-widget elementor-widget-heading" data-id="97d1ea3" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;none&quot;}" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-			<h1 class="elementor-heading-title elementor-size-default">Subscribe to Habitat for the World</h1>		</div>
-				</div>
+					<header>
+		<h1>Donation</h1>
+<body class="donate">
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Support Our Cause</h2>
+                        
+                        <!-- Donation Form with Stripe -->
+                        <form id="payment-form">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="amount">Amount:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="amount" placeholder="Enter donation amount" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="card-element">Credit Card:</label>
+                                <div id="card-element"></div>
+                                <!-- Used to display form errors -->
+                                <div id="card-errors" role="alert"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block">Donate Now</button>
+                        </form>
+                        <!-- End Donation Form with Stripe -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <!-- Your Stripe Publishable Key -->
+    <script>
+        var stripe = Stripe('your-publishable-key');
+        var elements = stripe.elements();
+
+        // Create an instance of the card Element.
+        var card = elements.create('card');
+
+        // Add an instance of the card Element into the `card-element` div.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    // You can also use result.token to create a charge or a customer in your Stripe account.
+                    console.log(result.token);
+                    // Handle the token here (e.g., send it to your server)
+                    // For demo purposes, you can just alert the token.
+                    alert('Token created: ' + result.token.id);
+                }
+            });
+        });
+    </script>
+		
 				<div class="elementor-element elementor-element-36034ec elementor-widget elementor-widget-text-editor" data-id="36034ec" data-element_type="widget" data-widget_type="text-editor.default">
 				<div class="elementor-widget-container">
 								<div class="elementor-text-editor elementor-clearfix">
